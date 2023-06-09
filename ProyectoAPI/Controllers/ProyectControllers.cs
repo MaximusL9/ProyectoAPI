@@ -181,6 +181,6 @@ namespace ProyectoAPI.Controllers
 
             return NoContent();
         }
-        //METODOS
+        //METODOS AGREGAR
     }
 }
