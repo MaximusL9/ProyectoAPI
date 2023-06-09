@@ -10,6 +10,10 @@ namespace ProyectoAPI.Data
 
         }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Venta> Ventas { get; set; }
+        public DbSet<Producto> Productos { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
