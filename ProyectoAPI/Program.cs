@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ProyectoAPI;
 using ProyectoAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ProyectContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddAutoMapper(typeof(ConfiguracionDeMapeo));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
