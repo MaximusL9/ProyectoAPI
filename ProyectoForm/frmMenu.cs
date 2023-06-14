@@ -28,26 +28,26 @@ namespace ProyectoForm
 
         private void btnTrabajadores_Click(object sender, EventArgs e)
         {
-            //BotonActivo((Button)sender);
-            //AbrirFormulario(new frmTrabajadores());
+            BotonActivo((Button)sender);
+            AbrirFormulario(new frmTrabajadores());
         }
 
         private void btnClientes_Click(object sender, EventArgs e)
         {
-            //BotonActivo((Button)sender);
-            //AbrirFormulario(new frmClientes());
+            BotonActivo((Button)sender);
+            AbrirFormulario(new frmClientes());
         }
 
         private void btnProductos_Click(object sender, EventArgs e)
         {
-            //BotonActivo((Button)sender);
-            //AbrirFormulario(new frmProductos());
+            BotonActivo((Button)sender);
+            AbrirFormulario(new frmProductos());
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
-            //BotonActivo((Button)sender);
-            //AbrirFormulario(new frmVentas());
+            BotonActivo((Button)sender);
+            AbrirFormulario(new frmVentas());
         }
         private void AbrirFormulario(Form FormularioHijo)
         {

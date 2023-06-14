@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMenu));
             PanelMenuTop = new Panel();
+            lblNombreFormulario = new Label();
             label5 = new Label();
             lblUsuario = new Label();
             lblFecha = new Label();
@@ -38,12 +39,11 @@
             pictureBox2 = new PictureBox();
             label1 = new Label();
             PanelMenu = new Panel();
-            btnVentas = new Button();
             btnProductos = new Button();
+            btnVentas = new Button();
             btnClientes = new Button();
             btnTrabajadores = new Button();
             PanelContenido = new Panel();
-            lblNombreFormulario = new Label();
             PanelMenuTop.SuspendLayout();
             PanelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -62,6 +62,17 @@
             PanelMenuTop.Name = "PanelMenuTop";
             PanelMenuTop.Size = new Size(1262, 62);
             PanelMenuTop.TabIndex = 5;
+            // 
+            // lblNombreFormulario
+            // 
+            lblNombreFormulario.AutoSize = true;
+            lblNombreFormulario.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombreFormulario.ForeColor = Color.White;
+            lblNombreFormulario.Location = new Point(23, 19);
+            lblNombreFormulario.Name = "lblNombreFormulario";
+            lblNombreFormulario.Size = new Size(17, 25);
+            lblNombreFormulario.TabIndex = 0;
+            lblNombreFormulario.Text = " ";
             // 
             // label5
             // 
@@ -140,34 +151,14 @@
             // PanelMenu
             // 
             PanelMenu.BackColor = Color.MidnightBlue;
-            PanelMenu.Controls.Add(btnVentas);
             PanelMenu.Controls.Add(btnProductos);
+            PanelMenu.Controls.Add(btnVentas);
             PanelMenu.Controls.Add(btnClientes);
             PanelMenu.Controls.Add(btnTrabajadores);
             PanelMenu.Location = new Point(1, 64);
             PanelMenu.Name = "PanelMenu";
             PanelMenu.Size = new Size(182, 856);
             PanelMenu.TabIndex = 6;
-            // 
-            // btnVentas
-            // 
-            btnVentas.Cursor = Cursors.Hand;
-            btnVentas.Dock = DockStyle.Top;
-            btnVentas.FlatStyle = FlatStyle.Flat;
-            btnVentas.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnVentas.ForeColor = Color.White;
-            btnVentas.Image = (Image)resources.GetObject("btnVentas.Image");
-            btnVentas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnVentas.Location = new Point(0, 180);
-            btnVentas.Name = "btnVentas";
-            btnVentas.Padding = new Padding(15, 0, 0, 0);
-            btnVentas.Size = new Size(182, 60);
-            btnVentas.TabIndex = 6;
-            btnVentas.Text = "Ventas";
-            btnVentas.TextAlign = ContentAlignment.MiddleLeft;
-            btnVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnVentas.UseVisualStyleBackColor = true;
-            btnVentas.Click += btnVentas_Click;
             // 
             // btnProductos
             // 
@@ -178,16 +169,36 @@
             btnProductos.ForeColor = Color.White;
             btnProductos.Image = (Image)resources.GetObject("btnProductos.Image");
             btnProductos.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProductos.Location = new Point(0, 120);
+            btnProductos.Location = new Point(0, 180);
             btnProductos.Name = "btnProductos";
             btnProductos.Padding = new Padding(15, 0, 0, 0);
             btnProductos.Size = new Size(182, 60);
-            btnProductos.TabIndex = 3;
+            btnProductos.TabIndex = 7;
             btnProductos.Text = "Productos";
             btnProductos.TextAlign = ContentAlignment.MiddleLeft;
             btnProductos.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnProductos.UseVisualStyleBackColor = true;
             btnProductos.Click += btnProductos_Click;
+            // 
+            // btnVentas
+            // 
+            btnVentas.Cursor = Cursors.Hand;
+            btnVentas.Dock = DockStyle.Top;
+            btnVentas.FlatStyle = FlatStyle.Flat;
+            btnVentas.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnVentas.ForeColor = Color.White;
+            btnVentas.Image = (Image)resources.GetObject("btnVentas.Image");
+            btnVentas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnVentas.Location = new Point(0, 120);
+            btnVentas.Name = "btnVentas";
+            btnVentas.Padding = new Padding(15, 0, 0, 0);
+            btnVentas.Size = new Size(182, 60);
+            btnVentas.TabIndex = 6;
+            btnVentas.Text = "Ventas";
+            btnVentas.TextAlign = ContentAlignment.MiddleLeft;
+            btnVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnVentas.UseVisualStyleBackColor = true;
+            btnVentas.Click += btnVentas_Click;
             // 
             // btnClientes
             // 
@@ -237,17 +248,6 @@
             PanelContenido.Size = new Size(1243, 722);
             PanelContenido.TabIndex = 2;
             // 
-            // lblNombreFormulario
-            // 
-            lblNombreFormulario.AutoSize = true;
-            lblNombreFormulario.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            lblNombreFormulario.ForeColor = Color.White;
-            lblNombreFormulario.Location = new Point(23, 19);
-            lblNombreFormulario.Name = "lblNombreFormulario";
-            lblNombreFormulario.Size = new Size(17, 25);
-            lblNombreFormulario.TabIndex = 0;
-            lblNombreFormulario.Text = " ";
-            // 
             // frmMenu
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -283,10 +283,10 @@
         private Label label1;
         private Panel PanelMenu;
         private Button btnVentas;
-        private Button btnProductos;
         private Button btnClientes;
         private Button btnTrabajadores;
         private Panel PanelContenido;
         private Label lblNombreFormulario;
+        private Button btnProductos;
     }
 }
