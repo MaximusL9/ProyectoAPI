@@ -4,17 +4,19 @@ using ProyectoAPI.Data;
 using ProyectoAPI.Models.Dto;
 using ProyectoAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
+using ProyectoAPI.Repository.IRepository;
 
 namespace ProyectoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProyectControllers : ControllerBase
+    public class TrabajadorController : ControllerBase
     {
         private readonly ProyectContext _db;
-        private readonly ILogger<ProyectControllers> _logger;
+        private readonly ITrabajadorRepository _trabajadorRepo;
+        private readonly ILogger<TrabajadorController> _logger;
 
-        public ProyectControllers(ILogger<ProyectControllers> logger, ProyectContext db)
+        public TrabajadorController(ILogger<TrabajadorController> logger, ProyectContext db)
         {
             _logger = logger;
             _db = db;
