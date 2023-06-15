@@ -26,7 +26,7 @@ namespace ProyectoAPI.Controllers
             this.logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("GetProductos")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<ProductoDto>>> GetProductos()
@@ -49,7 +49,7 @@ namespace ProyectoAPI.Controllers
             return Ok(map.Map<ProductoDto>(producto));
 
         }
-        [HttpPost]
+        [HttpPost("AddProducto")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<ActionResult<ProductoDto>> RegistrarProducto([FromBody] RegistrarProductoDto Pdto)
