@@ -6,19 +6,21 @@ using Microsoft.Identity.Client;
 using ProyectoAPI.Data;
 using ProyectoAPI.Models;
 using ProyectoAPI.Models.Dto;
+using ProyectoAPI.Repository;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
 
 namespace ProyectoAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    
     public class ProductoController : ControllerBase
     {
 
         private readonly IMapper map;
         private readonly ProyectContext PC;
+        private readonly ProductoRepositery PR;
+
         private readonly ILogger<ProductoController>? logger;
 
         public ProductoController(ProyectContext pC, ILogger<ProductoController>? logger)
@@ -34,8 +36,8 @@ namespace ProyectoAPI.Controllers
         {
 
             logger?.LogInformation("Obtener Productos");
-
-            return Ok(await PC.Productos.ToListAsync());
+            var ListaProductos = await PR.GetAll();
+            return Ok( map.Map<IEnumerable<ProductoDto>>(ListaProductos));
 
         }
         [HttpGet("{Id:int}", Name = "GetProductosId")]
@@ -43,7 +45,8 @@ namespace ProyectoAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<ProductoDto>> GetProductoId(int Id)
         {
-            var producto = await PC.Productos.FirstOrDefaultAsync(p => p.IdProducto == Id);
+            if(Id == 0) { return BadRequest(Id); }
+            var producto = await PR.Get(p => p.IdProducto == Id);
 
             if (producto == null) { return NotFound(); }
 
@@ -60,17 +63,17 @@ namespace ProyectoAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (await PC.Productos.FirstOrDefaultAsync(p => p.Nombre_Produto.ToLower() == Pdto.Nombre_Producto.ToLower()) != null) {
+            if (await PR.Get(p => p.Nombre_Produto.ToLower() == Pdto.Nombre_Producto.ToLower()) != null) {
 
                 ModelState.AddModelError("Producto existente", "Error el producto Ya existe");
                 return BadRequest(ModelState);
             }
 
             Producto PModel = map.Map<Producto>(Pdto);
-            await PC.Productos.AddAsync(PModel);
-            await PC.SaveChangesAsync();
+            await PR.Create(PModel);
+            
 
-            return CreatedAtRoute("RegistrarProducto", new { id = PModel.IdProducto }, PModel);
+            return CreatedAtRoute("AddProducto", new { id = PModel.IdProducto }, PModel);
         }
         [HttpPut("{id:int}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -84,8 +87,8 @@ namespace ProyectoAPI.Controllers
 
             Producto Pmodel = map.Map<Producto>(Adto);
 
-            PC.Productos.Update(Pmodel);
-            await PC.SaveChangesAsync();
+           await PR.updateProducto(Pmodel);
+           
 
             return NoContent();
         }
@@ -94,14 +97,14 @@ namespace ProyectoAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> EliminarProducto(int id)
         {
-            Producto? Pmodel = await PC.Productos.FirstOrDefaultAsync(n => n.IdProducto == id);
+            Producto? Pmodel = await PR.Get(n => n.IdProducto == id);
             
             if(Pmodel == null)
             {
                 return BadRequest();
             }
-            PC.Remove(Pmodel);
-            await PC.SaveChangesAsync();
+           await  PR.Remove(Pmodel);
+          
             return NoContent();
 
         }
