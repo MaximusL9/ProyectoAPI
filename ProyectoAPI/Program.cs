@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoAPI;
 using ProyectoAPI.Data;
+using ProyectoAPI.Repository;
+using ProyectoAPI.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,10 @@ builder.Services.AddDbContext<ProyectContext>(option =>
 });
 
 builder.Services.AddAutoMapper(typeof(ConfiguracionDeMapeo));
+
+//Inyección de los Repository
+builder.Services.AddScoped<ITrabajadorRepository, TrabajadorRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
