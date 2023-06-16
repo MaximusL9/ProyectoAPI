@@ -7,6 +7,7 @@ using ProyectoAPI.Data;
 using ProyectoAPI.Models;
 using ProyectoAPI.Models.Dto;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
 
 namespace ProyectoAPI.Controllers
@@ -28,7 +29,7 @@ namespace ProyectoAPI.Controllers
 
         [HttpGet("GetProductos")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+       
         public async Task<ActionResult<IEnumerable<ProductoDto>>> GetProductos()
         {
 
@@ -69,7 +70,40 @@ namespace ProyectoAPI.Controllers
             await PC.Productos.AddAsync(PModel);
             await PC.SaveChangesAsync();
 
-            return CreatedAtRoute("GetEmployee", new { id = PModel.IdProducto }, PModel);
+            return CreatedAtRoute("RegistrarProducto", new { id = PModel.IdProducto }, PModel);
+        }
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> actualizarProducto(int Id, [FromBody] ActualizarProductoDto Adto)
+        {
+            if (Adto == null || Id != Adto.IdProducto)
+            {
+                return BadRequest();
+            }
+
+            Producto Pmodel = map.Map<Producto>(Adto);
+
+            PC.Productos.Update(Pmodel);
+            await PC.SaveChangesAsync();
+
+            return NoContent();
+        }
+        [HttpDelete("id:{int}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> EliminarProducto(int id)
+        {
+            Producto? Pmodel = await PC.Productos.FirstOrDefaultAsync(n => n.IdProducto == id);
+            
+            if(Pmodel == null)
+            {
+                return BadRequest();
+            }
+            PC.Remove(Pmodel);
+            await PC.SaveChangesAsync();
+            return NoContent();
+
         }
     }
 }
