@@ -10,10 +10,10 @@ namespace ProyectoAPI.Models
         public int IdProducto { get; set; }
 
         [Required]
-        public string? Nombre_Produto { get; set; }
+        public string? Nombre_Producto { get; set; }
 
         [Required]
-        public string? Precio_Producto { get; set; }
+        public double Precio_Producto { get; set; }
 
         [Required]
 

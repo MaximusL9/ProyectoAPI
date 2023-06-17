@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoAPI.Data;
 
@@ -11,9 +12,11 @@ using ProyectoAPI.Data;
 namespace ProyectoAPI.Migrations
 {
     [DbContext(typeof(ProyectContext))]
-    partial class ProyectContextModelSnapshot : ModelSnapshot
+    [Migration("20230617003643_RegistrarProducto")]
+    partial class RegistrarProducto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,12 +92,13 @@ namespace ProyectoAPI.Migrations
                     b.Property<int>("Existencias")
                         .HasColumnType("int");
 
-                    b.Property<string>("Nombre_Producto")
+                    b.Property<string>("Nombre_Produto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Precio_Producto")
-                        .HasColumnType("float");
+                    b.Property<string>("Precio_Producto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdProducto");
 

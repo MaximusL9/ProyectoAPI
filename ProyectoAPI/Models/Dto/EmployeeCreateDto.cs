@@ -4,8 +4,8 @@ namespace ProyectoAPI.Models.Dto
 {
     public class EmployeeCreateDto
     {
-        public int NumeroInss { get; set; }
         [Required]
+        public int NumeroInss { get; set; }
         public string? Nombre { get; set; }
         public string? Cargo { get; set; }
         public DateTime DateofBirth { get; set; }

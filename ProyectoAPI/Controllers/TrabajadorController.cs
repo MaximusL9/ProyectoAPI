@@ -69,7 +69,7 @@ namespace ProyectoAPI.Controllers
 
             if (await _trabajadorRepo.Get(t=> t.Nombre.ToLower()==employeeCreateDto.Nombre.ToLower()) !=null)
             {
-                ModelState.AddModelError("NombreExiste", "¡El Empleado con ese nombre ya existe!");
+                ModelState.AddModelError("Nombre Existe", "¡El Empleado con ese nombre ya existe!");
                 return BadRequest(ModelState);
             }
 
