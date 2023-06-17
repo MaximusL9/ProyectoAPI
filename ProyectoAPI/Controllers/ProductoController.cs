@@ -70,7 +70,7 @@ namespace ProyectoAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (await _productoRepo.Get(p => p.Nombre_Producto.ToLower() == productoCreateDto.Nombre_Producto.ToLower()) != null) 
+            if (await _productoRepo.Get(p => p.NombreProducto.ToLower() == productoCreateDto.NombreProducto.ToLower()) != null) 
             {
 
                 ModelState.AddModelError("Producto existente", "Error, el producto ya existe");
@@ -80,7 +80,7 @@ namespace ProyectoAPI.Controllers
             Producto PModel = _mapper.Map<Producto>(productoCreateDto);
             await _productoRepo.Create(PModel);
             
-            return CreatedAtRoute("AddProducto", new { id = PModel.IdProducto }, PModel);
+            return CreatedAtRoute( new { id = PModel.IdProducto }, PModel);
         }
 
         [HttpPut("{id:int}")]

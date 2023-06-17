@@ -34,9 +34,6 @@ namespace ProyectoAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdVenta")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -46,8 +43,6 @@ namespace ProyectoAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCliente");
-
-                    b.HasIndex("IdVenta");
 
                     b.ToTable("Clientes");
                 });
@@ -84,16 +79,19 @@ namespace ProyectoAPI.Migrations
             modelBuilder.Entity("ProyectoAPI.Models.Producto", b =>
                 {
                     b.Property<int>("IdProducto")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProducto"));
 
                     b.Property<int>("Existencias")
                         .HasColumnType("int");
 
-                    b.Property<string>("Nombre_Producto")
+                    b.Property<string>("NombreProducto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Precio_Producto")
+                    b.Property<double>("PrecioProducto")
                         .HasColumnType("float");
 
                     b.HasKey("IdProducto");
@@ -112,10 +110,13 @@ namespace ProyectoAPI.Migrations
                     b.Property<double>("Cambio")
                         .HasColumnType("float");
 
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdProducto")
                         .HasColumnType("int");
 
-                    b.Property<double>("Precio_Producto")
+                    b.Property<double>("PrecioProducto")
                         .HasColumnType("float");
 
                     b.Property<double>("TotalVenta")
@@ -123,31 +124,19 @@ namespace ProyectoAPI.Migrations
 
                     b.HasKey("IdVenta");
 
+                    b.HasIndex("IdProducto");
+
                     b.ToTable("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoAPI.Models.Cliente", b =>
-                {
-                    b.HasOne("ProyectoAPI.Models.Venta", "Ventas")
-                        .WithMany()
-                        .HasForeignKey("IdVenta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ventas");
-                });
-
-            modelBuilder.Entity("ProyectoAPI.Models.Producto", b =>
-                {
-                    b.HasOne("ProyectoAPI.Models.Venta", null)
-                        .WithMany("Productos")
-                        .HasForeignKey("IdProducto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProyectoAPI.Models.Venta", b =>
                 {
+                    b.HasOne("ProyectoAPI.Models.Producto", "Productos")
+                        .WithMany()
+                        .HasForeignKey("IdProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618

@@ -14,13 +14,15 @@ namespace ProyectoAPI.Models
 
         [Required]
         public double Cambio { get; set; }
-
+        [Required]
+        public double PrecioProducto { get; set; }
+        [Required]
+        public int Cantidad { get; set; }
         public int IdProducto { get; set; }
         
-        public double Precio_Producto { get; set; }
         [ForeignKey("IdProducto")]
 
-        public List<Producto>? Productos { get; set; }
+        public Producto? Productos { get; set; }
 
         
     }

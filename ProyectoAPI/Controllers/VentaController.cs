@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using ProyectoAPI.Models;
 using ProyectoAPI.Models.Dto;
 using ProyectoAPI.Repository;
+using ProyectoAPI.Repository.IRepository;
 
 namespace ProyectoAPI.Controllers
 {
@@ -11,11 +12,11 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class VentaController:ControllerBase
     {
-        private readonly VentaRepositery VR;
+        private readonly IVentasRepositery VR;
         private readonly IMapper mapper;
-        private readonly ILogger logger;
+        private readonly ILogger<VentaController> logger;
 
-        public VentaController(VentaRepositery vR, IMapper mapper, ILogger logger)
+        public VentaController(IVentasRepositery vR, IMapper mapper, ILogger<VentaController> logger)
         {
             VR = vR;
             this.mapper = mapper;
@@ -51,11 +52,12 @@ namespace ProyectoAPI.Controllers
         public async Task<ActionResult<ProductoDto>> RegistrarVenta([FromBody] RegistrarVentaDto Rvto)
         {
 
-            if (!ModelState.IsValid) { return BadRequest(); }
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+
             var VModel = mapper.Map<Venta>(Rvto);
             await VR.Create(VModel);
 
-            return CreatedAtRoute("AddVenta", new { id = VModel.IdVenta }, VModel);
+            return CreatedAtRoute( new { id = VModel.IdVenta }, VModel);
         }
        
     }

@@ -9,6 +9,9 @@ namespace ProyectoAPI.Models.Dto
         public double TotalVenta { get; set; }
 
         public double Cambio { get; set; }
+
+        public double PrecioProducto { get; set; }
+        public int Cantidad { get; set; }
         [Required]
         public int IdProducto { get; set; }
     }

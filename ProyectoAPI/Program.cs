@@ -23,6 +23,8 @@ builder.Services.AddAutoMapper(typeof(ConfiguracionDeMapeo));
 //Inyección de los Repository
 builder.Services.AddScoped<ITrabajadorRepository, TrabajadorRepository>();
 builder.Services.AddScoped<IProductoRepositery, ProductoRepositery>();
+builder.Services.AddScoped<IVentasRepositery, VentaRepositery>();
+builder.Services.AddScoped<IClientesRepositery, ClienteRepositery>();
 
 var app = builder.Build();
 

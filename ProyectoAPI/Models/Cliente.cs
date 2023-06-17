@@ -17,11 +17,7 @@ namespace ProyectoAPI.Models
         [Required]
         public string? Telefono { get; set; }
 
-        public int IdVenta { get; set; }
-
-        [ForeignKey("IdVenta")]
-
-        public Venta? Ventas { get; set; }
+      
 
 
 

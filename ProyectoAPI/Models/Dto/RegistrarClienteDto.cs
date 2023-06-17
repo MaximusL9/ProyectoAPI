@@ -4,7 +4,7 @@
     {
         public string? Nombre { get; set; }
 
-        public string? Direeccion { get; set; }
+        public string? Direccion { get; set; }
 
         public string? Telefono { get; set; }
 

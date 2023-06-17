@@ -4,13 +4,13 @@ namespace ProyectoAPI.Models.Dto
 {
     public class ActualizarProductoDto
     {
-        [Required]
+        
 
         public int IdProducto { get; set; }
         [Required]
-        public string? Nombre_Producto { get; set; }
+        public string? NombreProducto { get; set; }
         [Required]
-        public double Precio_Producto { get; set; }
+        public double PrecioProducto { get; set; }
 
         [Required]
         public int Existencias { get; set; }

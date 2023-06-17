@@ -6,6 +6,9 @@
 
         public double cambio { get; set; }
 
+        public double PrecioProducto { get; set; }
+
+        public int Cantidad { get; set; }
         public int IdProducto { get; set; }
     }
 }

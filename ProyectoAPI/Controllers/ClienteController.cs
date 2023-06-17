@@ -14,11 +14,11 @@ namespace ProyectoAPI.Controllers
     public class ClienteController : ControllerBase
     {
         
-        private readonly ClienteRepositery IC;
-        private readonly ILogger logger;
+        private readonly IClientesRepositery IC;
+        private readonly ILogger<ClienteController> logger;
         private readonly IMapper mapper;
 
-        public ClienteController(ClienteRepositery iC, ILogger logger, IMapper mapper)
+        public ClienteController(IClientesRepositery iC, ILogger<ClienteController> logger, IMapper mapper)
         {
             IC = iC;
             this.logger = logger;
@@ -78,7 +78,7 @@ namespace ProyectoAPI.Controllers
             await IC.Create(CModel);
 
 
-            return CreatedAtRoute("AddCliente", new { id = CModel.IdCliente }, CModel);
+            return CreatedAtRoute(new { id = CModel.IdCliente }, CModel);
         }
 
         [HttpPut("UpdateCliente")]
