@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrabajadores));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             statusStrip1 = new StatusStrip();
             slblFecha = new ToolStripStatusLabel();
             slblHora = new ToolStripStatusLabel();
             btnModificar = new Button();
-            btnBorrar = new Button();
+            btnEliminar = new Button();
             dgvTrabajadores = new DataGridView();
-            btnClear = new Button();
-            btnNuevo = new Button();
+            btnLimpiar = new Button();
+            btnAgregar = new Button();
             panel1 = new Panel();
             label1 = new Label();
             label3 = new Label();
@@ -55,7 +55,6 @@
             txtNumeroINSS = new TextBox();
             label7 = new Label();
             label8 = new Label();
-            txtFecha = new TextBox();
             label4 = new Label();
             label13 = new Label();
             txtCargo = new TextBox();
@@ -64,6 +63,7 @@
             label16 = new Label();
             label17 = new Label();
             txtSalario = new TextBox();
+            dtpFecha = new DateTimePicker();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTrabajadores).BeginInit();
             SuspendLayout();
@@ -103,36 +103,38 @@
             btnModificar.TabIndex = 95;
             btnModificar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnModificar.UseVisualStyleBackColor = false;
+            btnModificar.Click += btnModificar_Click;
             // 
-            // btnBorrar
+            // btnEliminar
             // 
-            btnBorrar.BackColor = Color.WhiteSmoke;
-            btnBorrar.Cursor = Cursors.Hand;
-            btnBorrar.FlatStyle = FlatStyle.Flat;
-            btnBorrar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnBorrar.Image = (Image)resources.GetObject("btnBorrar.Image");
-            btnBorrar.Location = new Point(914, 198);
-            btnBorrar.Name = "btnBorrar";
-            btnBorrar.Size = new Size(37, 21);
-            btnBorrar.TabIndex = 96;
-            btnBorrar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnBorrar.UseVisualStyleBackColor = false;
+            btnEliminar.BackColor = Color.WhiteSmoke;
+            btnEliminar.Cursor = Cursors.Hand;
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEliminar.Image = (Image)resources.GetObject("btnEliminar.Image");
+            btnEliminar.Location = new Point(914, 198);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(37, 21);
+            btnEliminar.TabIndex = 96;
+            btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEliminar.UseVisualStyleBackColor = false;
+            btnEliminar.Click += btnEliminar_Click;
             // 
             // dgvTrabajadores
             // 
             dgvTrabajadores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTrabajadores.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvTrabajadores.BackgroundColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.Black;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.Padding = new Padding(1);
-            dataGridViewCellStyle1.SelectionBackColor = Color.CornflowerBlue;
-            dataGridViewCellStyle1.SelectionForeColor = Color.White;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvTrabajadores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvTrabajadores.ColumnHeadersHeight = 30;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.Black;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.Padding = new Padding(1);
+            dataGridViewCellStyle3.SelectionBackColor = Color.CornflowerBlue;
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvTrabajadores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvTrabajadores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTrabajadores.EnableHeadersVisualStyles = false;
             dgvTrabajadores.GridColor = Color.DimGray;
             dgvTrabajadores.Location = new Point(41, 237);
@@ -140,49 +142,52 @@
             dgvTrabajadores.Name = "dgvTrabajadores";
             dgvTrabajadores.ReadOnly = true;
             dgvTrabajadores.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.White;
-            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.White;
-            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvTrabajadores.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.White;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = Color.White;
+            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvTrabajadores.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             dgvTrabajadores.RowTemplate.Height = 25;
             dgvTrabajadores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTrabajadores.Size = new Size(965, 365);
             dgvTrabajadores.TabIndex = 32;
+            dgvTrabajadores.CellClick += dgvTrabajadores_CellClick;
             // 
-            // btnClear
+            // btnLimpiar
             // 
-            btnClear.BackColor = Color.WhiteSmoke;
-            btnClear.Cursor = Cursors.Hand;
-            btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnClear.Image = (Image)resources.GetObject("btnClear.Image");
-            btnClear.Location = new Point(957, 198);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(37, 21);
-            btnClear.TabIndex = 93;
-            btnClear.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnClear.UseVisualStyleBackColor = false;
+            btnLimpiar.BackColor = Color.WhiteSmoke;
+            btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
+            btnLimpiar.Location = new Point(957, 198);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(37, 21);
+            btnLimpiar.TabIndex = 93;
+            btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
-            // btnNuevo
+            // btnAgregar
             // 
-            btnNuevo.BackColor = Color.MediumSeaGreen;
-            btnNuevo.Cursor = Cursors.Hand;
-            btnNuevo.FlatStyle = FlatStyle.Flat;
-            btnNuevo.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnNuevo.ForeColor = Color.White;
-            btnNuevo.Image = (Image)resources.GetObject("btnNuevo.Image");
-            btnNuevo.Location = new Point(60, 198);
-            btnNuevo.Name = "btnNuevo";
-            btnNuevo.Size = new Size(116, 29);
-            btnNuevo.TabIndex = 31;
-            btnNuevo.Text = "Agregar";
-            btnNuevo.TextAlign = ContentAlignment.MiddleRight;
-            btnNuevo.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnNuevo.UseVisualStyleBackColor = false;
+            btnAgregar.BackColor = Color.MediumSeaGreen;
+            btnAgregar.Cursor = Cursors.Hand;
+            btnAgregar.FlatStyle = FlatStyle.Flat;
+            btnAgregar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAgregar.ForeColor = Color.White;
+            btnAgregar.Image = (Image)resources.GetObject("btnAgregar.Image");
+            btnAgregar.Location = new Point(60, 198);
+            btnAgregar.Name = "btnAgregar";
+            btnAgregar.Size = new Size(116, 29);
+            btnAgregar.TabIndex = 31;
+            btnAgregar.Text = "Agregar";
+            btnAgregar.TextAlign = ContentAlignment.MiddleRight;
+            btnAgregar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAgregar.UseVisualStyleBackColor = false;
+            btnAgregar.Click += btnAgregar_Click;
             // 
             // panel1
             // 
@@ -324,13 +329,6 @@
             label8.TabIndex = 97;
             label8.Text = "Número del INSS:";
             // 
-            // txtFecha
-            // 
-            txtFecha.Location = new Point(297, 147);
-            txtFecha.Name = "txtFecha";
-            txtFecha.Size = new Size(203, 20);
-            txtFecha.TabIndex = 113;
-            // 
             // label4
             // 
             label4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
@@ -399,6 +397,15 @@
             txtSalario.Size = new Size(203, 20);
             txtSalario.TabIndex = 117;
             // 
+            // dtpFecha
+            // 
+            dtpFecha.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            dtpFecha.Format = DateTimePickerFormat.Short;
+            dtpFecha.Location = new Point(297, 147);
+            dtpFecha.Name = "dtpFecha";
+            dtpFecha.Size = new Size(203, 22);
+            dtpFecha.TabIndex = 118;
+            // 
             // frmTrabajadores
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -406,10 +413,10 @@
             BackColor = Color.LightGray;
             ClientSize = new Size(1048, 549);
             ControlBox = false;
+            Controls.Add(dtpFecha);
             Controls.Add(txtSalario);
             Controls.Add(label17);
             Controls.Add(label16);
-            Controls.Add(txtFecha);
             Controls.Add(label4);
             Controls.Add(label13);
             Controls.Add(txtCargo);
@@ -428,10 +435,10 @@
             Controls.Add(label7);
             Controls.Add(label8);
             Controls.Add(btnModificar);
-            Controls.Add(btnBorrar);
+            Controls.Add(btnEliminar);
             Controls.Add(dgvTrabajadores);
-            Controls.Add(btnClear);
-            Controls.Add(btnNuevo);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnAgregar);
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(label3);
@@ -440,6 +447,7 @@
             Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "frmTrabajadores";
             Text = "Lista de Trabajadores";
+            Load += frmTrabajadores_Load;
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTrabajadores).EndInit();
@@ -453,10 +461,10 @@
         private ToolStripStatusLabel slblFecha;
         private ToolStripStatusLabel slblHora;
         private Button btnModificar;
-        private Button btnBorrar;
+        private Button btnEliminar;
         private DataGridView dgvTrabajadores;
-        private Button btnClear;
-        private Button btnNuevo;
+        private Button btnLimpiar;
+        private Button btnAgregar;
         private Panel panel1;
         private Label label1;
         private Label label3;
@@ -473,7 +481,6 @@
         private TextBox txtNumeroINSS;
         private Label label7;
         private Label label8;
-        private TextBox txtFecha;
         private Label label4;
         private Label label13;
         private TextBox txtCargo;
@@ -482,5 +489,6 @@
         private Label label16;
         private Label label17;
         private TextBox txtSalario;
+        private DateTimePicker dtpFecha;
     }
 }

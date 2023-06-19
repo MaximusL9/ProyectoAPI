@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoAPI.Data;
 
@@ -10,9 +11,11 @@ using ProyectoAPI.Data;
 namespace ProyectoAPI.Migrations
 {
     [DbContext(typeof(ProyectContext))]
-    partial class ProyectContextModelSnapshot : ModelSnapshot
+    [Migration("20230619010739_EmpleadosDate2")]
+    partial class EmpleadosDate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -223,7 +223,7 @@
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvClientes.ColumnHeadersHeight = 30;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvClientes.EnableHeadersVisualStyles = false;
             dgvClientes.GridColor = Color.DimGray;
             dgvClientes.Location = new Point(40, 235);
@@ -378,6 +378,7 @@
             Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             Name = "frmClientes";
             Text = "Lista de Clientes";
+            Load += frmClientes_Load;
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();

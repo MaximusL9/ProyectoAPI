@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProyectoAPI.Models.Dto
+namespace ProyectoForm.Dto
 {
     public class EmployeeDto
     {

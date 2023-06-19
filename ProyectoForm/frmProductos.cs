@@ -16,5 +16,11 @@ namespace ProyectoForm
         {
             InitializeComponent();
         }
+
+        private void frmProductos_Load(object sender, EventArgs e)
+        {
+            slblFecha.Text = DateTime.Now.ToLongDateString();
+            slblHora.Text = DateTime.Now.ToLongTimeString();
+        }
     }
 }
