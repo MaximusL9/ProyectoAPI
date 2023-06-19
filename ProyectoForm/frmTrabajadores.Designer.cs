@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTrabajadores));
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             statusStrip1 = new StatusStrip();
             slblFecha = new ToolStripStatusLabel();
             slblHora = new ToolStripStatusLabel();
@@ -64,8 +65,10 @@
             label17 = new Label();
             txtSalario = new TextBox();
             dtpFecha = new DateTimePicker();
+            erpError = new ErrorProvider(components);
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTrabajadores).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)erpError).BeginInit();
             SuspendLayout();
             // 
             // statusStrip1
@@ -95,6 +98,7 @@
             // 
             btnModificar.BackColor = Color.WhiteSmoke;
             btnModificar.Cursor = Cursors.Hand;
+            btnModificar.Enabled = false;
             btnModificar.FlatStyle = FlatStyle.Flat;
             btnModificar.Image = (Image)resources.GetObject("btnModificar.Image");
             btnModificar.Location = new Point(871, 198);
@@ -109,6 +113,7 @@
             // 
             btnEliminar.BackColor = Color.WhiteSmoke;
             btnEliminar.Cursor = Cursors.Hand;
+            btnEliminar.Enabled = false;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnEliminar.Image = (Image)resources.GetObject("btnEliminar.Image");
@@ -125,15 +130,15 @@
             dgvTrabajadores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvTrabajadores.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dgvTrabajadores.BackgroundColor = Color.WhiteSmoke;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.Black;
-            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.Padding = new Padding(1);
-            dataGridViewCellStyle3.SelectionBackColor = Color.CornflowerBlue;
-            dataGridViewCellStyle3.SelectionForeColor = Color.White;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvTrabajadores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.Black;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.Padding = new Padding(1);
+            dataGridViewCellStyle1.SelectionBackColor = Color.CornflowerBlue;
+            dataGridViewCellStyle1.SelectionForeColor = Color.White;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvTrabajadores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvTrabajadores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvTrabajadores.EnableHeadersVisualStyles = false;
             dgvTrabajadores.GridColor = Color.DimGray;
@@ -142,14 +147,14 @@
             dgvTrabajadores.Name = "dgvTrabajadores";
             dgvTrabajadores.ReadOnly = true;
             dgvTrabajadores.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.White;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.White;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvTrabajadores.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.White;
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvTrabajadores.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvTrabajadores.RowTemplate.Height = 25;
             dgvTrabajadores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTrabajadores.Size = new Size(965, 365);
@@ -160,6 +165,7 @@
             // 
             btnLimpiar.BackColor = Color.WhiteSmoke;
             btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.Enabled = false;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
@@ -175,6 +181,7 @@
             // 
             btnAgregar.BackColor = Color.MediumSeaGreen;
             btnAgregar.Cursor = Cursors.Hand;
+            btnAgregar.Enabled = false;
             btnAgregar.FlatStyle = FlatStyle.Flat;
             btnAgregar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnAgregar.ForeColor = Color.White;
@@ -235,6 +242,8 @@
             txtCiudad.Name = "txtCiudad";
             txtCiudad.Size = new Size(203, 20);
             txtCiudad.TabIndex = 107;
+            txtCiudad.TextChanged += txtCiudad_TextChanged;
+            txtCiudad.KeyPress += txtCiudad_KeyPress;
             // 
             // label9
             // 
@@ -260,6 +269,8 @@
             txtPais.Name = "txtPais";
             txtPais.Size = new Size(203, 20);
             txtPais.TabIndex = 104;
+            txtPais.TextChanged += txtPais_TextChanged;
+            txtPais.KeyPress += txtPais_KeyPress;
             // 
             // label11
             // 
@@ -285,6 +296,8 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(203, 20);
             txtNombre.TabIndex = 101;
+            txtNombre.TextChanged += txtNombre_TextChanged;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // label5
             // 
@@ -310,6 +323,8 @@
             txtNumeroINSS.Name = "txtNumeroINSS";
             txtNumeroINSS.Size = new Size(203, 20);
             txtNumeroINSS.TabIndex = 99;
+            txtNumeroINSS.TextChanged += txtNumeroINSS_TextChanged;
+            txtNumeroINSS.KeyPress += txtNumeroINSS_KeyPress;
             // 
             // label7
             // 
@@ -353,6 +368,8 @@
             txtCargo.Name = "txtCargo";
             txtCargo.Size = new Size(203, 20);
             txtCargo.TabIndex = 111;
+            txtCargo.TextChanged += txtCargo_TextChanged;
+            txtCargo.KeyPress += txtCargo_KeyPress;
             // 
             // label14
             // 
@@ -396,6 +413,8 @@
             txtSalario.Name = "txtSalario";
             txtSalario.Size = new Size(203, 20);
             txtSalario.TabIndex = 117;
+            txtSalario.TextChanged += txtSalario_TextChanged;
+            txtSalario.KeyPress += txtSalario_KeyPress;
             // 
             // dtpFecha
             // 
@@ -405,6 +424,10 @@
             dtpFecha.Name = "dtpFecha";
             dtpFecha.Size = new Size(203, 22);
             dtpFecha.TabIndex = 118;
+            // 
+            // erpError
+            // 
+            erpError.ContainerControl = this;
             // 
             // frmTrabajadores
             // 
@@ -451,6 +474,7 @@
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTrabajadores).EndInit();
+            ((System.ComponentModel.ISupportInitialize)erpError).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -490,5 +514,6 @@
         private Label label17;
         private TextBox txtSalario;
         private DateTimePicker dtpFecha;
+        private ErrorProvider erpError;
     }
 }

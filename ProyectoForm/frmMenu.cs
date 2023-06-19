@@ -21,7 +21,7 @@ namespace ProyectoForm
 
         private void frmMenu_Load(object sender, EventArgs e)
         {
-            lblUsuario.Text = "Admin";
+            lblUsuario.Text = "Administrador";
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             PanelMenuTop.BackColor = Color.FromArgb(20, 20, 95);
         }

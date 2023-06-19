@@ -39,7 +39,7 @@ namespace ProyectoForm
                 }
                 else
                 {
-                    MessageBox.Show($"No se puede obtener la lista de empleados {response.StatusCode}");
+                    MessageBox.Show($"No se puede obtener la lista de empleados {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -66,9 +66,9 @@ namespace ProyectoForm
                 var content = new StringContent(empleado, Encoding.UTF8, "application/json");
                 var result = await client.PostAsync("https://localhost:7163/api/Trabajador", content);
                 if (result.IsSuccessStatusCode)
-                    MessageBox.Show("Empleado Agregado Correctamente");
+                    MessageBox.Show("Empleado Agregado Correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show($"Error al guardar el empleado: {result.Content.ReadAsStringAsync().Result}");
+                    MessageBox.Show($"Error al guardar el empleado: {result.Content.ReadAsStringAsync().Result}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Clear();
             GetAllEmpleados();
@@ -84,7 +84,6 @@ namespace ProyectoForm
             txtCiudad.Text = string.Empty;
             txtSalario.Text = string.Empty;
             txtNumeroINSS.Enabled = true;
-            btnAgregar.Enabled = true;
         }
         private static int inss = 0;
 
@@ -100,6 +99,9 @@ namespace ProyectoForm
             }
             txtNumeroINSS.Enabled = false;
             btnAgregar.Enabled = false;
+            btnEliminar.Enabled = true;
+            btnModificar.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
         private async void GetEmpladoByInss()
@@ -121,7 +123,7 @@ namespace ProyectoForm
                 }
                 else
                 {
-                    MessageBox.Show($"No se pudo obtener el empleado: {response.StatusCode}");
+                    MessageBox.Show($"No se pudo obtener el empleado: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -139,7 +141,7 @@ namespace ProyectoForm
                 NumeroInss = inss,
                 Nombre = txtNombre.Text,
                 Cargo = txtCargo.Text,
-                DateofBirth = dtpFecha.Value.ToString(),
+                DateofBirth = dtpFecha.Value.ToShortDateString(),
                 Pais = txtPais.Text,
                 Ciudad = txtCiudad.Text,
                 Salario = Convert.ToInt32(txtSalario.Text)
@@ -150,9 +152,9 @@ namespace ProyectoForm
                 var content = new StringContent(serializedEmpleado, Encoding.UTF8, "application/json");
                 var response = await client.PutAsync(String.Format("{0}/{1}", "https://localhost:7163/api/Trabajador", inss), content);
                 if (response.IsSuccessStatusCode)
-                    MessageBox.Show("Empleado actualizado correctamente");
+                    MessageBox.Show("Empleado actualizado correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show($"Error al actualizar el empleado: {response.StatusCode}");
+                    MessageBox.Show($"Error al actualizar el empleado: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Clear();
             GetAllEmpleados();
@@ -171,9 +173,9 @@ namespace ProyectoForm
                 client.BaseAddress = new Uri("https://localhost:7163/api/Trabajador");
                 var response = await client.DeleteAsync(String.Format("{0}/{1}", "https://localhost:7163/api/Trabajador", inss));
                 if (response.IsSuccessStatusCode)
-                    MessageBox.Show("Empleado eliminado con éxito");
+                    MessageBox.Show("Empleado eliminado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show($"No se pudo eliminar el empleado: {response.StatusCode}");
+                    MessageBox.Show($"No se pudo eliminar el empleado: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Clear();
             GetAllEmpleados();
@@ -183,5 +185,79 @@ namespace ProyectoForm
         {
             Clear();
         }
+
+        private void txtNumeroINSS_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarNumeros(e);
+            if (!valida)
+                erpError.SetError(txtNumeroINSS, "Ingrese solo Números");
+            else
+                erpError.Clear();
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarLetras(e);
+            if (!valida)
+                erpError.SetError(txtNombre, "Ingrese cadenas de solo texto");
+            else
+                erpError.Clear();
+        }
+
+        private void txtCargo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarLetras(e);
+            if (!valida)
+                erpError.SetError(txtCargo, "Ingrese cadenas de solo texto");
+            else
+                erpError.Clear();
+        }
+
+        private void txtPais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarLetras(e);
+            if (!valida)
+                erpError.SetError(txtPais, "Ingrese cadenas de solo texto");
+            else
+                erpError.Clear();
+        }
+
+        private void txtCiudad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarLetras(e);
+            if (!valida)
+                erpError.SetError(txtCiudad, "Ingrese cadenas de solo texto");
+            else
+                erpError.Clear();
+        }
+
+        private void txtSalario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarNumeros(e);
+            if (!valida)
+                erpError.SetError(txtSalario, "Ingrese solo Números");
+            else
+                erpError.Clear();
+        }
+        private void ValidarCampo()
+        {
+            var vr = !string.IsNullOrEmpty(txtNumeroINSS.Text) && !string.IsNullOrEmpty(txtNombre.Text) && !string.IsNullOrEmpty(txtCargo.Text) && !string.IsNullOrEmpty(txtPais.Text) && !string.IsNullOrEmpty(txtCiudad.Text) && !string.IsNullOrEmpty(txtSalario.Text);
+            btnAgregar.Enabled = vr;
+            btnEliminar.Enabled = vr;
+            btnModificar.Enabled = vr;
+            btnLimpiar.Enabled = vr;
+        }
+
+        private void txtNumeroINSS_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtCargo_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtPais_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtCiudad_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtSalario_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
     }
 }

@@ -39,7 +39,7 @@ namespace ProyectoForm
                 }
                 else
                 {
-                    MessageBox.Show($"No se puede obtener la lista de clientes {response.StatusCode}");
+                    MessageBox.Show($"No se puede obtener la lista de clientes {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -62,9 +62,9 @@ namespace ProyectoForm
                 var content = new StringContent(cliente, Encoding.UTF8, "application/json");
                 var result = await client.PostAsync("https://localhost:7163/api/Cliente/AddCliente", content);
                 if (result.IsSuccessStatusCode)
-                    MessageBox.Show("Cliente Agregado Correctamente");
+                    MessageBox.Show("Cliente Agregado Correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show($"Error al guardar el cliente: {result.Content.ReadAsStringAsync().Result}");
+                    MessageBox.Show($"Error al guardar el cliente: {result.Content.ReadAsStringAsync().Result}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Clear();
             GetAllClientes();
@@ -76,7 +76,7 @@ namespace ProyectoForm
             txtNombre.Text = string.Empty;
             txtDireccion.Text = string.Empty;
             txtTelefono.Text = string.Empty;
-            btnNuevo.Enabled = true;
+            btnNuevo.Enabled = false;
         }
         private static int id = 0;
 
@@ -91,6 +91,9 @@ namespace ProyectoForm
                 }
             }
             btnNuevo.Enabled = false;
+            btnBorrar.Enabled = true;
+            btnModificar.Enabled = true;
+            btnLimpiar.Enabled = true;
         }
 
         private async void GetClienteById()
@@ -109,7 +112,7 @@ namespace ProyectoForm
                 }
                 else
                 {
-                    MessageBox.Show($"No se pudo obtener el cliente: {response.StatusCode}");
+                    MessageBox.Show($"No se pudo obtener el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -135,9 +138,9 @@ namespace ProyectoForm
                 var content = new StringContent(serializedCliente, Encoding.UTF8, "application/json");
                 var response = await client.PutAsync(String.Format("{0}{1}", "https://localhost:7163/api/Cliente?Id=", id), content);
                 if (response.IsSuccessStatusCode)
-                    MessageBox.Show("Cliente actualizado correctamente");
+                    MessageBox.Show("Cliente actualizado correctamente", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show($"Error al actualizar el cliente: {response.StatusCode}");
+                    MessageBox.Show($"Error al actualizar el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Clear();
             GetAllClientes();
@@ -156,9 +159,9 @@ namespace ProyectoForm
                 client.BaseAddress = new Uri("https://localhost:7163/api/Cliente/DeleteCliente?Id=");
                 var response = await client.DeleteAsync(String.Format("{0}{1}", "https://localhost:7163/api/Cliente/DeleteCliente?Id=", id));
                 if (response.IsSuccessStatusCode)
-                    MessageBox.Show("Cliente eliminado con éxito");
+                    MessageBox.Show("Cliente eliminado con éxito", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 else
-                    MessageBox.Show($"No se pudo eliminar el cliente: {response.StatusCode}");
+                    MessageBox.Show($"No se pudo eliminar el cliente: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Clear();
             GetAllClientes();
@@ -168,5 +171,48 @@ namespace ProyectoForm
         {
             Clear();
         }
+
+        private void txtIDCliente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarNumeros(e);
+            if (!valida)
+                erpError.SetError(txtIDCliente, "Ingrese solo Números");
+            else
+                erpError.Clear();
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarLetras(e);
+            if (!valida)
+                erpError.SetError(txtNombre, "Ingrese cadenas de solo texto");
+            else
+                erpError.Clear();
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            bool valida = ValidarTextbox.ValidarNumerosYGuion(e);
+            if (!valida)
+                erpError.SetError(txtTelefono, "Ingrese solo Números");
+            else
+                erpError.Clear();
+        }
+        private void ValidarCampo()
+        {
+            var vr = !string.IsNullOrEmpty(txtNombre.Text) && !string.IsNullOrEmpty(txtDireccion.Text) && !string.IsNullOrEmpty(txtTelefono.Text);
+            btnNuevo.Enabled = vr;
+            btnBorrar.Enabled = vr;
+            btnModificar.Enabled = vr;
+            btnLimpiar.Enabled = vr;
+        }
+
+        private void txtIDCliente_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtDireccion_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
+
+        private void txtTelefono_TextChanged(object sender, EventArgs e) { ValidarCampo(); }
     }
 }

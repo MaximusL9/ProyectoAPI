@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientes));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -55,8 +56,10 @@
             txtIDCliente = new TextBox();
             txtDireccion = new TextBox();
             txtTelefono = new TextBox();
+            erpError = new ErrorProvider(components);
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)erpError).BeginInit();
             SuspendLayout();
             // 
             // statusStrip1
@@ -124,6 +127,8 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(233, 20);
             txtNombre.TabIndex = 131;
+            txtNombre.TextChanged += txtNombre_TextChanged;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // label5
             // 
@@ -165,6 +170,7 @@
             // 
             btnModificar.BackColor = Color.WhiteSmoke;
             btnModificar.Cursor = Cursors.Hand;
+            btnModificar.Enabled = false;
             btnModificar.FlatStyle = FlatStyle.Flat;
             btnModificar.Image = (Image)resources.GetObject("btnModificar.Image");
             btnModificar.Location = new Point(870, 196);
@@ -179,6 +185,7 @@
             // 
             btnBorrar.BackColor = Color.WhiteSmoke;
             btnBorrar.Cursor = Cursors.Hand;
+            btnBorrar.Enabled = false;
             btnBorrar.FlatStyle = FlatStyle.Flat;
             btnBorrar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnBorrar.Image = (Image)resources.GetObject("btnBorrar.Image");
@@ -230,6 +237,7 @@
             // 
             btnLimpiar.BackColor = Color.WhiteSmoke;
             btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.Enabled = false;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
@@ -245,6 +253,7 @@
             // 
             btnNuevo.BackColor = Color.MediumSeaGreen;
             btnNuevo.Cursor = Cursors.Hand;
+            btnNuevo.Enabled = false;
             btnNuevo.FlatStyle = FlatStyle.Flat;
             btnNuevo.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnNuevo.ForeColor = Color.White;
@@ -306,6 +315,8 @@
             txtIDCliente.Name = "txtIDCliente";
             txtIDCliente.Size = new Size(233, 20);
             txtIDCliente.TabIndex = 145;
+            txtIDCliente.TextChanged += txtIDCliente_TextChanged;
+            txtIDCliente.KeyPress += txtIDCliente_KeyPress;
             // 
             // txtDireccion
             // 
@@ -313,6 +324,7 @@
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(233, 20);
             txtDireccion.TabIndex = 146;
+            txtDireccion.TextChanged += txtDireccion_TextChanged;
             // 
             // txtTelefono
             // 
@@ -320,6 +332,12 @@
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(233, 20);
             txtTelefono.TabIndex = 147;
+            txtTelefono.TextChanged += txtTelefono_TextChanged;
+            txtTelefono.KeyPress += txtTelefono_KeyPress;
+            // 
+            // erpError
+            // 
+            erpError.ContainerControl = this;
             // 
             // frmClientes
             // 
@@ -357,6 +375,7 @@
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)erpError).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -400,5 +419,6 @@
         private TextBox txtDireccion;
         private TextBox txtTelefono;
         private TextBox txtIDVenta;
+        private ErrorProvider erpError;
     }
 }
