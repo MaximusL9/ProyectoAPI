@@ -38,8 +38,6 @@
             label13 = new Label();
             label14 = new Label();
             label15 = new Label();
-            label11 = new Label();
-            label12 = new Label();
             txtNombre = new TextBox();
             label5 = new Label();
             label6 = new Label();
@@ -48,7 +46,7 @@
             btnModificar = new Button();
             btnBorrar = new Button();
             dgvClientes = new DataGridView();
-            btnClear = new Button();
+            btnLimpiar = new Button();
             btnNuevo = new Button();
             panel1 = new Panel();
             label1 = new Label();
@@ -57,7 +55,6 @@
             txtIDCliente = new TextBox();
             txtDireccion = new TextBox();
             txtTelefono = new TextBox();
-            txtIDVenta = new TextBox();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
@@ -89,7 +86,7 @@
             // 
             label4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Red;
-            label4.Location = new Point(451, 129);
+            label4.Location = new Point(634, 129);
             label4.Name = "label4";
             label4.Size = new Size(20, 13);
             label4.TabIndex = 144;
@@ -97,7 +94,7 @@
             // 
             // label13
             // 
-            label13.Location = new Point(404, 129);
+            label13.Location = new Point(587, 129);
             label13.Name = "label13";
             label13.Size = new Size(53, 13);
             label13.TabIndex = 140;
@@ -107,7 +104,7 @@
             // 
             label14.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = Color.Red;
-            label14.Location = new Point(454, 81);
+            label14.Location = new Point(637, 81);
             label14.Name = "label14";
             label14.Size = new Size(20, 13);
             label14.TabIndex = 142;
@@ -115,33 +112,15 @@
             // 
             // label15
             // 
-            label15.Location = new Point(404, 81);
+            label15.Location = new Point(587, 81);
             label15.Name = "label15";
             label15.Size = new Size(55, 13);
             label15.TabIndex = 139;
             label15.Text = "Dirección:";
             // 
-            // label11
-            // 
-            label11.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.Red;
-            label11.Location = new Point(761, 81);
-            label11.Name = "label11";
-            label11.Size = new Size(20, 13);
-            label11.TabIndex = 135;
-            label11.Text = "(*)";
-            // 
-            // label12
-            // 
-            label12.Location = new Point(714, 81);
-            label12.Name = "label12";
-            label12.Size = new Size(52, 13);
-            label12.TabIndex = 133;
-            label12.Text = "ID Venta:";
-            // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(91, 145);
+            txtNombre.Location = new Point(197, 145);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(233, 20);
             txtNombre.TabIndex = 131;
@@ -150,7 +129,7 @@
             // 
             label5.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.Red;
-            label5.Location = new Point(189, 129);
+            label5.Location = new Point(295, 129);
             label5.Name = "label5";
             label5.Size = new Size(20, 13);
             label5.TabIndex = 132;
@@ -158,7 +137,7 @@
             // 
             // label6
             // 
-            label6.Location = new Point(88, 129);
+            label6.Location = new Point(194, 129);
             label6.Name = "label6";
             label6.Size = new Size(105, 13);
             label6.TabIndex = 128;
@@ -168,7 +147,7 @@
             // 
             label7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Red;
-            label7.Location = new Point(141, 81);
+            label7.Location = new Point(247, 81);
             label7.Name = "label7";
             label7.Size = new Size(20, 13);
             label7.TabIndex = 130;
@@ -176,7 +155,7 @@
             // 
             // label8
             // 
-            label8.Location = new Point(88, 81);
+            label8.Location = new Point(194, 81);
             label8.Name = "label8";
             label8.Size = new Size(56, 13);
             label8.TabIndex = 127;
@@ -194,6 +173,7 @@
             btnModificar.TabIndex = 125;
             btnModificar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnModificar.UseVisualStyleBackColor = false;
+            btnModificar.Click += btnModificar_Click;
             // 
             // btnBorrar
             // 
@@ -208,6 +188,7 @@
             btnBorrar.TabIndex = 126;
             btnBorrar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBorrar.UseVisualStyleBackColor = false;
+            btnBorrar.Click += btnBorrar_Click;
             // 
             // dgvClientes
             // 
@@ -243,20 +224,22 @@
             dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.Size = new Size(965, 365);
             dgvClientes.TabIndex = 121;
+            dgvClientes.CellClick += dgvClientes_CellClick;
             // 
-            // btnClear
+            // btnLimpiar
             // 
-            btnClear.BackColor = Color.WhiteSmoke;
-            btnClear.Cursor = Cursors.Hand;
-            btnClear.FlatStyle = FlatStyle.Flat;
-            btnClear.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnClear.Image = (Image)resources.GetObject("btnClear.Image");
-            btnClear.Location = new Point(956, 196);
-            btnClear.Name = "btnClear";
-            btnClear.Size = new Size(37, 21);
-            btnClear.TabIndex = 124;
-            btnClear.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnClear.UseVisualStyleBackColor = false;
+            btnLimpiar.BackColor = Color.WhiteSmoke;
+            btnLimpiar.Cursor = Cursors.Hand;
+            btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLimpiar.Image = (Image)resources.GetObject("btnLimpiar.Image");
+            btnLimpiar.Location = new Point(956, 196);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(37, 21);
+            btnLimpiar.TabIndex = 124;
+            btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnLimpiar.UseVisualStyleBackColor = false;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnNuevo
             // 
@@ -274,6 +257,7 @@
             btnNuevo.TextAlign = ContentAlignment.MiddleRight;
             btnNuevo.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnNuevo.UseVisualStyleBackColor = false;
+            btnNuevo.Click += btnNuevo_Click;
             // 
             // panel1
             // 
@@ -317,31 +301,25 @@
             // 
             // txtIDCliente
             // 
-            txtIDCliente.Location = new Point(91, 97);
+            txtIDCliente.Enabled = false;
+            txtIDCliente.Location = new Point(197, 97);
             txtIDCliente.Name = "txtIDCliente";
             txtIDCliente.Size = new Size(233, 20);
             txtIDCliente.TabIndex = 145;
             // 
             // txtDireccion
             // 
-            txtDireccion.Location = new Point(404, 97);
+            txtDireccion.Location = new Point(587, 97);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(233, 20);
             txtDireccion.TabIndex = 146;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(404, 145);
+            txtTelefono.Location = new Point(587, 145);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(233, 20);
             txtTelefono.TabIndex = 147;
-            // 
-            // txtIDVenta
-            // 
-            txtIDVenta.Location = new Point(714, 97);
-            txtIDVenta.Name = "txtIDVenta";
-            txtIDVenta.Size = new Size(233, 20);
-            txtIDVenta.TabIndex = 148;
             // 
             // frmClientes
             // 
@@ -350,7 +328,6 @@
             BackColor = Color.LightGray;
             ClientSize = new Size(1048, 549);
             ControlBox = false;
-            Controls.Add(txtIDVenta);
             Controls.Add(txtTelefono);
             Controls.Add(txtDireccion);
             Controls.Add(txtIDCliente);
@@ -358,8 +335,6 @@
             Controls.Add(label13);
             Controls.Add(label14);
             Controls.Add(label15);
-            Controls.Add(label11);
-            Controls.Add(label12);
             Controls.Add(txtNombre);
             Controls.Add(label5);
             Controls.Add(label6);
@@ -368,7 +343,7 @@
             Controls.Add(btnModificar);
             Controls.Add(btnBorrar);
             Controls.Add(dgvClientes);
-            Controls.Add(btnClear);
+            Controls.Add(btnLimpiar);
             Controls.Add(btnNuevo);
             Controls.Add(panel1);
             Controls.Add(label1);
@@ -415,7 +390,7 @@
         private Button btnModificar;
         private Button btnBorrar;
         private DataGridView dgvClientes;
-        private Button btnClear;
+        private Button btnLimpiar;
         private Button btnNuevo;
         private Panel panel1;
         private Label label1;

@@ -113,7 +113,6 @@ namespace ProyectoAPI.Controllers
                 return NotFound();
             }
             await _trabajadorRepo.Remove(employee);
-            //await _db.SaveChangesAsync(true);
 
             return NoContent();
         }

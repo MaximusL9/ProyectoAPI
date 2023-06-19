@@ -13,7 +13,7 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        
+
         private readonly IClientesRepositery IC;
         private readonly ILogger<ClienteController> logger;
         private readonly IMapper mapper;
@@ -81,16 +81,14 @@ namespace ProyectoAPI.Controllers
             return CreatedAtRoute(new { id = CModel.IdCliente }, CModel);
         }
 
-        [HttpPut("UpdateCliente")]
+        [HttpPut(Name = "UpdateCliente")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> ActualizarCliente([FromBody] ModificarClienteDto Mdto, int Id){
-
-            if (Mdto == null ||  Mdto.IdCliente != Id) { return BadRequest(); }
-
-            var CModel = mapper.Map<Cliente>(Mdto);
-            await IC.updateCliente(CModel);
-
+        public async Task<IActionResult> ActualizarCliente([FromBody] ModificarClienteDto Mdto, int Id)
+        {
+            if (Mdto == null || Id != Mdto.IdCliente) { return BadRequest(); }
+            Cliente modelo=mapper.Map<Cliente>(Mdto);
+            await IC.updateCliente(modelo);
             return NoContent();
         }
 

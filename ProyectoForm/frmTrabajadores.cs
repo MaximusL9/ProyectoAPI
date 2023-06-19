@@ -33,13 +33,13 @@ namespace ProyectoForm
                 var response = await client.GetAsync("https://localhost:7163/api/Trabajador");
                 if (response.IsSuccessStatusCode)
                 {
-                    var students = await response.Content.ReadAsStringAsync();
-                    var result = JsonConvert.DeserializeObject<List<EmployeeDto>>(students);
+                    var empleados = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<List<EmployeeDto>>(empleados);
                     dgvTrabajadores.DataSource = result.ToList();
                 }
                 else
                 {
-                    MessageBox.Show($"No se puede obtener la lista de estudiantes {response.StatusCode}");
+                    MessageBox.Show($"No se puede obtener la lista de empleados {response.StatusCode}");
                 }
             }
         }
