@@ -17,11 +17,11 @@ namespace ProyectoForm
 {
     public partial class frmVentas : Form
     {
-        private List<ProductoDgv> Pdgv = new ();
-        
+        private List<ProductoDgv> Pdgv = new();
+
         double Total = 0;
         double Impuestos = 0;
-        
+
         public frmVentas()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace ProyectoForm
             btnVentas.Enabled = false;
             txtDinRecib.Enabled = false;
             txtIDcliente.Enabled = false;
-            
+
         }
 
 
@@ -107,12 +107,12 @@ namespace ProyectoForm
                     MessageBox.Show("Error , El id proporcionado no corresponde a algun producto existente");
                 }
 
-               
+
             }
 
         }
 
-     
+
         private async void GetAllVentas()
         {
             using (var client = new HttpClient())
@@ -132,7 +132,7 @@ namespace ProyectoForm
 
         }
 
-       
+
         private void AsignarUriVentas(HttpClient client)
         {
 
@@ -140,7 +140,7 @@ namespace ProyectoForm
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-       
+
 
         private void label8_Click(object sender, EventArgs e)
         {
@@ -151,33 +151,33 @@ namespace ProyectoForm
         {
 
         }
-       
+
         private void btnNuevo_Click_1(object sender, EventArgs e)
         {
 
-            if (txtIDProducto.Text!="" && txtCantProduct.Text != "")
+            if (txtIDProducto.Text != "" && txtCantProduct.Text != "")
             {
-                GetIdProducts(int.Parse(txtIDProducto.Text), int.Parse(txtCantProduct.Text)); 
+                GetIdProducts(int.Parse(txtIDProducto.Text), int.Parse(txtCantProduct.Text));
             }
-        
+
         }
         private void dgvVentas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
         }
-        
-        private  void btnVentas_Click(object sender, EventArgs e)
+
+        private void btnVentas_Click(object sender, EventArgs e)
         {
 
-                agregarVentas(Total, Impuestos);
-                
+            agregarVentas(Total, Impuestos);
+
         }
 
         private async void agregarVentas(double total, double impuestos)
         {
-           using(var client = new HttpClient())
+            using (var client = new HttpClient())
             {
-                if (txtDinRecib.Text != "" )
+                if (txtDinRecib.Text != "")
                 {
                     if (txtIDcliente.Text == "" && double.Parse(txtDinRecib.Text) > (Total + Impuestos))
                     {
@@ -187,7 +187,7 @@ namespace ProyectoForm
 
                             Iva = impuestos,
                             TotalVenta = total,
-                            Cambio = double.Parse(txtDinRecib.Text) - (total+Impuestos),
+                            Cambio = double.Parse(txtDinRecib.Text) - (total + Impuestos),
 
                             Fecha = fecha
 
@@ -202,11 +202,11 @@ namespace ProyectoForm
                         {
                             MessageBox.Show($"Error al guardar la venta: {response.StatusCode}");
                         }
-                        else { btnNuevo.Enabled = true;  btnVentas.Enabled = true; }
+                        else { btnNuevo.Enabled = true; btnVentas.Enabled = true;  Default(); }
                     }
                     else
                     {
-                        if (txtIDcliente.Text=="" &&double.Parse(txtDinRecib.Text) > (Total + Impuestos))
+                        if (txtIDcliente.Text == "" && double.Parse(txtDinRecib.Text) > (Total + Impuestos))
                         {
                             DateTime fecha = DateTime.Now;
                             RegistrarVentaDto Venta = new()
@@ -234,42 +234,44 @@ namespace ProyectoForm
                                 lblCambio.Text = (double.Parse(txtDinRecib.Text) - total).ToString();
                                 btnVentas.Enabled = false;
                                 btnNuevo.Enabled = true;
+                                Default();
+
                             }
                         }
                         else { MessageBox.Show("pago insuficiente"); }
                     }
                 }
                 else { MessageBox.Show("Pago insuficiente"); }
-               
+
             }
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             GetAllVentas();
         }
 
-        private async void TotalPagar () {
-           
+        private async void TotalPagar() {
+
             if (dgvVentas != null)
             {
 
 
                 foreach (DataGridViewRow Item in dgvVentas.Rows)
                 {
-                    double Precio =   double.Parse(Item.Cells[2].Value.ToString());
+                    double Precio = double.Parse(Item.Cells[2].Value.ToString());
                     double Cantidad = int.Parse(Item.Cells[3].Value.ToString());
 
                     Total = Total + (Precio * Cantidad);
-                    
+
                 }
 
                 Impuestos = Total * 0.15;
                 lblTotal.Text = (Total + Impuestos).ToString();
-               
+
                 btnNuevo.Enabled = false;
-              }
-            
+            }
+
         }
 
         private void txtCalcular_Click(object sender, EventArgs e)
@@ -282,7 +284,7 @@ namespace ProyectoForm
 
         private void txtIDProduct_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtDinRecib_KeyPress(object sender, KeyPressEventArgs e)
@@ -320,6 +322,13 @@ namespace ProyectoForm
                 erpError.SetError(txtIDProducto, "Ingrese solo Números");
             else
                 erpError.Clear();
+        }
+        private void Default(){
+            Impuestos = 0;
+            Total = 0;
+            dgvVentas.DataSource = null;
+
+        
         }
     }
 }
