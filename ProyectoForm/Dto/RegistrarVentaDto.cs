@@ -1,14 +1,22 @@
-﻿namespace ProyectoForm.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProyectoForm.Dto
 {
     public class RegistrarVentaDto
     {
+        
+
+        [Required]
         public double TotalVenta { get; set; }
 
-        public double cambio { get; set; }
+        [Required]
 
-        public double PrecioProducto { get; set; }
+        public double Iva { get; set; }
 
-        public int Cantidad { get; set; }
-        public int IdProducto { get; set; }
+        public double Cambio { get; set; }
+
+        public int? IdCliente { get; set; }
+
+        public DateTime Fecha { get; set; }
     }
 }

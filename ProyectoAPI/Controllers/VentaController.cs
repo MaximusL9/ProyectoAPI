@@ -49,7 +49,7 @@ namespace ProyectoAPI.Controllers
         [HttpPost("AddVenta")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<ProductoDto>> RegistrarVenta([FromBody] RegistrarVentaDto Rvto)
+        public async Task<ActionResult<VentaDto>> RegistrarVenta([FromBody] RegistrarVentaDto Rvto)
         {
 
             if (!ModelState.IsValid) { return BadRequest(ModelState); }

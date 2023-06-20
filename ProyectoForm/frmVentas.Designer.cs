@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVentas));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,7 +39,7 @@
             this.txtDinRecib = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.lblCambio = new System.Windows.Forms.Label();
             this.txtCantProduct = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,8 +56,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnVentas = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtIDcliente = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtCalcular = new System.Windows.Forms.Button();
+            this.erpError = new System.Windows.Forms.ErrorProvider(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpError)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -90,6 +98,8 @@
             this.txtIDProducto.Name = "txtIDProducto";
             this.txtIDProducto.Size = new System.Drawing.Size(233, 20);
             this.txtIDProducto.TabIndex = 170;
+            this.txtIDProducto.TextChanged += new System.EventHandler(this.txtIDProduct_TextChanged);
+            this.txtIDProducto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDProducto_KeyPress);
             // 
             // txtDinRecib
             // 
@@ -97,6 +107,7 @@
             this.txtDinRecib.Name = "txtDinRecib";
             this.txtDinRecib.Size = new System.Drawing.Size(233, 20);
             this.txtDinRecib.TabIndex = 168;
+            this.txtDinRecib.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDinRecib_KeyPress);
             // 
             // label4
             // 
@@ -116,13 +127,15 @@
             this.label13.TabIndex = 165;
             this.label13.Text = "ID Producto:";
             // 
-            // label15
+            // lblCambio
             // 
-            this.label15.Location = new System.Drawing.Point(796, 107);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(111, 45);
-            this.label15.TabIndex = 164;
-            this.label15.Text = "Cambio:";
+            this.lblCambio.BackColor = System.Drawing.Color.White;
+            this.lblCambio.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lblCambio.Location = new System.Drawing.Point(809, 138);
+            this.lblCambio.Name = "lblCambio";
+            this.lblCambio.Size = new System.Drawing.Size(184, 45);
+            this.lblCambio.TabIndex = 164;
+            this.lblCambio.Text = "Cambio:";
             // 
             // txtCantProduct
             // 
@@ -130,6 +143,7 @@
             this.txtCantProduct.Name = "txtCantProduct";
             this.txtCantProduct.Size = new System.Drawing.Size(233, 20);
             this.txtCantProduct.TabIndex = 160;
+            this.txtCantProduct.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantProduct_KeyPress);
             // 
             // label5
             // 
@@ -230,6 +244,7 @@
             this.dgvVentas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVentas.Size = new System.Drawing.Size(965, 365);
             this.dgvVentas.TabIndex = 152;
+            this.dgvVentas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVentas_CellContentClick);
             // 
             // btnClear
             // 
@@ -319,6 +334,7 @@
             this.btnVentas.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVentas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnVentas.UseVisualStyleBackColor = false;
+            this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
             // button1
             // 
@@ -328,7 +344,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(371, 197);
+            this.button1.Location = new System.Drawing.Point(536, 197);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 29);
             this.button1.TabIndex = 174;
@@ -336,6 +352,65 @@
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.BackColor = System.Drawing.Color.White;
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.lblTotal.Location = new System.Drawing.Point(766, 86);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(227, 34);
+            this.lblTotal.TabIndex = 175;
+            this.lblTotal.Text = "Total De Venta:";
+            // 
+            // txtIDcliente
+            // 
+            this.txtIDcliente.Location = new System.Drawing.Point(419, 150);
+            this.txtIDcliente.Name = "txtIDcliente";
+            this.txtIDcliente.Size = new System.Drawing.Size(233, 20);
+            this.txtIDcliente.TabIndex = 176;
+            this.txtIDcliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIDcliente_KeyPress);
+            // 
+            // label9
+            // 
+            this.label9.Location = new System.Drawing.Point(419, 134);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 13);
+            this.label9.TabIndex = 177;
+            this.label9.Text = "IdCliente:";
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(467, 134);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(20, 13);
+            this.label10.TabIndex = 178;
+            this.label10.Text = "(*)";
+            // 
+            // txtCalcular
+            // 
+            this.txtCalcular.BackColor = System.Drawing.Color.MediumSeaGreen;
+            this.txtCalcular.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtCalcular.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.txtCalcular.ForeColor = System.Drawing.Color.White;
+            this.txtCalcular.Image = ((System.Drawing.Image)(resources.GetObject("txtCalcular.Image")));
+            this.txtCalcular.Location = new System.Drawing.Point(371, 197);
+            this.txtCalcular.Name = "txtCalcular";
+            this.txtCalcular.Size = new System.Drawing.Size(116, 29);
+            this.txtCalcular.TabIndex = 179;
+            this.txtCalcular.Text = "Calcular";
+            this.txtCalcular.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtCalcular.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.txtCalcular.UseVisualStyleBackColor = false;
+            this.txtCalcular.Click += new System.EventHandler(this.txtCalcular_Click);
+            // 
+            // erpError
+            // 
+            this.erpError.ContainerControl = this;
             // 
             // frmVentas
             // 
@@ -344,6 +419,11 @@
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(1048, 549);
             this.ControlBox = false;
+            this.Controls.Add(this.txtCalcular);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txtIDcliente);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnVentas);
             this.Controls.Add(this.label1);
@@ -351,7 +431,7 @@
             this.Controls.Add(this.txtDinRecib);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.lblCambio);
             this.Controls.Add(this.txtCantProduct);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
@@ -369,9 +449,11 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "frmVentas";
             this.Text = "Lista de Ventas";
+            this.Load += new System.EventHandler(this.frmVentas_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVentas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.erpError)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,7 +468,7 @@
         private TextBox txtDinRecib;
         private Label label4;
         private Label label13;
-        private Label label15;
+        private Label lblCambio;
         private TextBox txtCantProduct;
         private Label label5;
         private Label label6;
@@ -403,5 +485,11 @@
         private Label label1;
         private Button btnVentas;
         private Button button1;
+        private Label lblTotal;
+        private TextBox txtIDcliente;
+        private Label label9;
+        private Label label10;
+        private Button txtCalcular;
+        private ErrorProvider erpError;
     }
 }

@@ -14,9 +14,9 @@ namespace ProyectoForm.Dto
         public double Iva { get; set; }
 
         public double Cambio { get; set; }
-        [Required]
+        
 
-        public int IdCliente { get; set; }
+        public int? IdCliente { get; set; }
 
         public DateTime Fecha { get; set; }
     }

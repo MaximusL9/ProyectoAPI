@@ -100,7 +100,7 @@ namespace ProyectoAPI.Controllers
            
             return NoContent();
         }
-        [HttpDelete("id:{int}")]
+        [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> EliminarProducto(int id)

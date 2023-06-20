@@ -6,13 +6,16 @@ namespace ProyectoAPI.Models.Dto
     {
         public int IdVenta { get; set; }
 
+        [Required]
         public double TotalVenta { get; set; }
 
-        public double Cambio { get; set; }
-
-        public double PrecioProducto { get; set; }
-        public int Cantidad { get; set; }
         [Required]
-        public int IdProducto { get; set; }
+
+        public double Iva { get; set; }
+        public double Cambio { get; set; }
+        
+        public int? IdCliente { get; set; }
+
+        public DateTime Fecha { get; set; }
     }
 }
