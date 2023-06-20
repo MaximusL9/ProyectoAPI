@@ -202,7 +202,7 @@ namespace ProyectoForm
                         {
                             MessageBox.Show($"Error al guardar la venta: {response.StatusCode}");
                         }
-                        else { btnNuevo.Enabled = true; btnVentas.Enabled = true;  Default(); }
+                        else { btnNuevo.Enabled = true; btnVentas.Enabled = true;  Default(); Clear(this); }
                     }
                     else
                     {
@@ -235,6 +235,7 @@ namespace ProyectoForm
                                 btnVentas.Enabled = false;
                                 btnNuevo.Enabled = true;
                                 Default();
+                                Clear(this);
 
                             }
                         }
@@ -329,6 +330,18 @@ namespace ProyectoForm
             dgvVentas.DataSource = null;
 
         
+        }
+
+        private void Clear(Form f)
+        {
+            foreach (Control Controls in f.Controls)
+            {
+                if (Controls is TextBox)
+                {
+                    Controls.Text = "";
+                }
+
+            }
         }
     }
 }
