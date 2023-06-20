@@ -27,7 +27,7 @@ namespace ProyectoForm
             slblFecha.Text = DateTime.Now.ToLongDateString();
             slblHora.Text = DateTime.Now.ToLongTimeString();
 
-            var productos = await GetAllProductos();
+            
         }
 
 

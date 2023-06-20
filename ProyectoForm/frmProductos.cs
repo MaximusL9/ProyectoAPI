@@ -46,7 +46,7 @@ namespace ProyectoForm
 
                 AsignarUri(client);
 
-                var response = await client.GetAsync("https://localhost:7163/api/Producto/");
+                var response = await client.GetAsync("https://localhost:7163/api/Producto");
 
                 if (response.IsSuccessStatusCode)
                 {
