@@ -33,7 +33,7 @@ namespace ProyectoAPI.Migrations
                     NumeroInss = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cargo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateofBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateofBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Pais = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ciudad = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Salario = table.Column<double>(type: "float", nullable: false)
@@ -65,42 +65,42 @@ namespace ProyectoAPI.Migrations
                     IdVenta = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalVenta = table.Column<double>(type: "float", nullable: false),
+                    Iva = table.Column<double>(type: "float", nullable: false),
                     Cambio = table.Column<double>(type: "float", nullable: false),
-                    PrecioProducto = table.Column<double>(type: "float", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    IdProducto = table.Column<int>(type: "int", nullable: false)
+                    IdCliente = table.Column<int>(type: "int", nullable: false),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ventas", x => x.IdVenta);
                     table.ForeignKey(
-                        name: "FK_Ventas_Productos_IdProducto",
-                        column: x => x.IdProducto,
-                        principalTable: "Productos",
-                        principalColumn: "IdProducto",
+                        name: "FK_Ventas_Clientes_IdCliente",
+                        column: x => x.IdCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "IdCliente",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ventas_IdProducto",
+                name: "IX_Ventas_IdCliente",
                 table: "Ventas",
-                column: "IdProducto");
+                column: "IdCliente");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Productos");
 
             migrationBuilder.DropTable(
                 name: "Ventas");
 
             migrationBuilder.DropTable(
-                name: "Productos");
+                name: "Clientes");
         }
     }
 }

@@ -52,7 +52,7 @@ namespace ProyectoForm
         private async void AddEmpleado()
         {
             EmployeeCreateDto employeeDto = new EmployeeCreateDto();
-            employeeDto.NumeroInss = Convert.ToInt32(txtNumeroINSS.Text);
+            employeeDto.NumeroInss = int.Parse(txtNumeroINSS.Text);
             employeeDto.Nombre = txtNombre.Text;
             employeeDto.Cargo = txtCargo.Text;
             employeeDto.DateofBirth = dtpFecha.Value.ToShortDateString();

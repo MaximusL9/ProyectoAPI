@@ -10,11 +10,12 @@ using ProyectoAPI.Repository;
 using ProyectoAPI.Repository.IRepository;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace ProyectoAPI.Controllers
 {
-    
+    [Route("api/[controller]")]
+    [ApiController]
     public class ProductoController : ControllerBase
     {
         private readonly IProductoRepositery _productoRepo;

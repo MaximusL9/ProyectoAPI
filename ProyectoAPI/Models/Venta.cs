@@ -13,16 +13,18 @@ namespace ProyectoAPI.Models
         public  double TotalVenta { get; set; }
 
         [Required]
+
+        public double Iva { get; set; }
         public double Cambio { get; set; }
         [Required]
-        public double PrecioProducto { get; set; }
-        [Required]
-        public int Cantidad { get; set; }
-        public int IdProducto { get; set; }
-        
-        [ForeignKey("IdProducto")]
+       
+        public int IdCliente{ get; set; }
 
-        public Producto? Productos { get; set; }
+        public DateTime Fecha { get; set; }
+        
+        [ForeignKey("IdCliente")]
+
+        public Cliente? cliente { get; set; }
 
         
     }
