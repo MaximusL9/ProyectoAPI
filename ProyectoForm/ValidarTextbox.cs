@@ -8,6 +8,7 @@ namespace ProyectoForm
 {
     public class ValidarTextbox
     {
+        //Validaciones de los textbox a traves del uso de los keychar que solo son mandados a llamar luego en los formularios
         public static bool ValidarNumeros(KeyPressEventArgs e)
         {
             if (Char.IsNumber(e.KeyChar))

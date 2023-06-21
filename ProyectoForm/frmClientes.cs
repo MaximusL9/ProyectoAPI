@@ -25,7 +25,7 @@ namespace ProyectoForm
             slblFecha.Text = DateTime.Now.ToLongDateString();
             slblHora.Text = DateTime.Now.ToLongTimeString();
         }
-
+        //Mandar a llamar todos los clientes
         private async void GetAllClientes()
         {
             using (var client = new HttpClient())
@@ -48,7 +48,7 @@ namespace ProyectoForm
         {
             AddClienteAsync();
         }
-
+        //Mandar a llamar todos los clientes
         private async void AddClienteAsync()
         {
             RegistrarClienteDto clienteDto = new RegistrarClienteDto();
@@ -69,7 +69,7 @@ namespace ProyectoForm
             Clear();
             GetAllClientes();
         }
-
+        //Limpiar todos los textbox
         private void Clear()
         {
             txtIDCliente.Text = string.Empty;
@@ -79,7 +79,7 @@ namespace ProyectoForm
             btnNuevo.Enabled = false;
         }
         private static int id = 0;
-
+        //Rellenar las celdas al tocar una celda del datagridview
         private void dgvClientes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             foreach (DataGridViewRow row in dgvClientes.Rows)
@@ -95,7 +95,7 @@ namespace ProyectoForm
             btnModificar.Enabled = true;
             btnLimpiar.Enabled = true;
         }
-
+        //Conseguir un cliente con el id
         private async void GetClienteById()
         {
             using (var client = new HttpClient())
@@ -122,7 +122,7 @@ namespace ProyectoForm
             if (id != 0)
                 UpdateCliente(id);
         }
-
+        //Modificar cliente con el metodo put
         private async void UpdateCliente(int id)
         {
             ModificarClienteDto clienteDto = new()
@@ -151,7 +151,7 @@ namespace ProyectoForm
             if (id != 0)
                 DeleteCliente();
         }
-
+        //Metodo para borrar clientes
         private async void DeleteCliente()
         {
             using (var client = new HttpClient())
@@ -171,7 +171,7 @@ namespace ProyectoForm
         {
             Clear();
         }
-
+        //Validaciones para los textbox solo entren letras o numeros
         private void txtIDCliente_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool valida = ValidarTextbox.ValidarNumeros(e);
@@ -198,6 +198,7 @@ namespace ProyectoForm
             else
                 erpError.Clear();
         }
+        //Validar que los campos de los textbox no esten vacios
         private void ValidarCampo()
         {
             var vr = !string.IsNullOrEmpty(txtNombre.Text) && !string.IsNullOrEmpty(txtDireccion.Text) && !string.IsNullOrEmpty(txtTelefono.Text);

@@ -34,12 +34,13 @@ namespace ProyectoForm
             btnVentas.Enabled = false;
             txtDinRecib.Enabled = false;
             txtIDcliente.Enabled = false;
+            GetAllVentas();
 
         }
 
 
 
-
+        //Asignar url para poder usarla y manipular la base de datos de productos con los metodos Http
         private void AsignarUri(HttpClient client)
         {
             client.BaseAddress = new Uri("https://localhost:7163/api/Producto/");
@@ -72,7 +73,7 @@ namespace ProyectoForm
 
 
         }
-
+        //Conseguir productos de un recurso en especifico de la base de datos con el id
         private async void GetIdProducts(int id, int Cantidad)
         {
             ProductoDto result;
@@ -112,7 +113,7 @@ namespace ProyectoForm
 
         }
 
-
+        //Mandar a llamar todas las ventas de la base de datos
         private async void GetAllVentas()
         {
             using (var client = new HttpClient())
@@ -132,7 +133,7 @@ namespace ProyectoForm
 
         }
 
-
+        //Asignar url para poder usarla y manipular la base de datos de ventas con los metodos Http
         private void AsignarUriVentas(HttpClient client)
         {
 
@@ -172,7 +173,7 @@ namespace ProyectoForm
             agregarVentas(Total, Impuestos);
 
         }
-
+        //Agregar nuevas ventas a la base de datos
         private async void agregarVentas(double total, double impuestos)
         {
             using (var client = new HttpClient())
@@ -251,7 +252,7 @@ namespace ProyectoForm
         {
             GetAllVentas();
         }
-
+        //Total a pagar de las ventas en la base de datos
         private async void TotalPagar() {
 
             if (dgvVentas != null)
@@ -287,7 +288,7 @@ namespace ProyectoForm
         {
 
         }
-
+        //Validaciones de los textbox para que solo entren letras o numeros
         private void txtDinRecib_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool valida = ValidarTextbox.ValidarNumeros(e);
@@ -331,7 +332,7 @@ namespace ProyectoForm
 
         
         }
-
+        //Limpiar controladores
         private void Clear(Form f)
         {
             foreach (Control Controls in f.Controls)

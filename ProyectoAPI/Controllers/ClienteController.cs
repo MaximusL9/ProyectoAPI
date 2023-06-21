@@ -13,7 +13,7 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-
+        //Metodos Http y uso del mapeado para cada uno de los controladores junto con su respectivo repository
         private readonly IClientesRepositery IC;
         private readonly ILogger<ClienteController> logger;
         private readonly IMapper mapper;
@@ -24,7 +24,7 @@ namespace ProyectoAPI.Controllers
             this.logger = logger;
             this.mapper = mapper;
         }
-
+        //METODOS HTTP DE LOS CLIENTES
         [HttpGet("GetAllClients")]
 
         [ProducesResponseType(StatusCodes.Status200OK)]

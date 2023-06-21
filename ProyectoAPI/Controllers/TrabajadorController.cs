@@ -13,7 +13,7 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class TrabajadorController : ControllerBase
     {
-        //private readonly ProyectContext _db;
+        //Metodos Http y uso del mapeado para cada uno de los controladores junto con su respectivo repository
         private readonly ITrabajadorRepository _trabajadorRepo;
         private readonly ILogger<TrabajadorController> _logger;
         private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace ProyectoAPI.Controllers
             _mapper = mapper;
 
         }
-        //METODOS DE LOS EMPLEADOS
+        //METODOS DE LOS HTTP DE LOS TRABAJADORES
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<EmployeeDto>>> GetEmployees() 
@@ -79,19 +79,8 @@ namespace ProyectoAPI.Controllers
             }
 
             Employee modelo=_mapper.Map<Employee>(employeeCreateDto);
-            //Employee modelo = new()
-            //{
-            //    NumeroInss = employeeCreateDto.NumeroInss,
-            //    Nombre = employeeCreateDto.Nombre,
-            //    Cargo = employeeCreateDto.Cargo,
-            //    DateofBirth = employeeCreateDto.DateofBirth,
-            //    Pais = employeeCreateDto.Pais,
-            //    Ciudad = employeeCreateDto.Ciudad,
-            //    Salario = employeeCreateDto.Salario,
-            //};
 
             await _trabajadorRepo.Create(modelo);
-            //await _db.SaveChangesAsync();
 
             return CreatedAtRoute("GetEmployee", new { id=modelo.NumeroInss}, modelo);
         }
@@ -128,19 +117,8 @@ namespace ProyectoAPI.Controllers
             }
 
             Employee modelo = _mapper.Map<Employee>(employeeUpdateDto);
-            //Employee modelo = new()
-            //{
-            //    NumeroInss = employeeUpdateDto.NumeroInss,
-            //    Nombre = employeeUpdateDto.Nombre,
-            //    Cargo = employeeUpdateDto.Cargo,
-            //    DateofBirth = employeeUpdateDto.DateofBirth,
-            //    Pais = employeeUpdateDto.Pais,
-            //    Ciudad = employeeUpdateDto.Ciudad,
-            //    Salario = employeeUpdateDto.Salario,
-            //};
 
             await _trabajadorRepo.Update(modelo);
-            //await _db.SaveChangesAsync();
 
             return NoContent();
         }
@@ -156,16 +134,7 @@ namespace ProyectoAPI.Controllers
             }
             var employee = await _trabajadorRepo.Get(n => n.NumeroInss == id, tracked: false);
             EmployeeUpdateDto employeeDto = _mapper.Map<EmployeeUpdateDto>(employee);
-            //EmployeeUpdateDto employeeDto = new()
-            //{
-            //    NumeroInss=employee.NumeroInss,
-            //    Nombre=employee.Nombre,
-            //    Cargo = employee.Cargo,
-            //    DateofBirth=employee.DateofBirth,
-            //    Pais = employee.Pais,
-            //    Ciudad=employee.Ciudad,
-            //    Salario=employee.Salario
-            //};
+
             if (employeeDto == null) return BadRequest();
 
             patchDto.ApplyTo(employeeDto, ModelState);
@@ -176,21 +145,10 @@ namespace ProyectoAPI.Controllers
             }
 
             Employee modelo=_mapper.Map<Employee>(employeeDto);
-            //Employee modelo = new() 
-            //{
-            //    NumeroInss=employeeDto.NumeroInss,
-            //    Nombre = employeeDto.Nombre,
-            //    Cargo = employeeDto.Cargo,
-            //    DateofBirth = employeeDto.DateofBirth,
-            //    Pais = employeeDto.Pais,
-            //    Ciudad = employeeDto.Ciudad,
-            //    Salario = employeeDto.Salario
-            //};
+
             await _trabajadorRepo.Update(modelo);
-            //await _db.SaveChangesAsync();
 
             return NoContent();
         }
-        //METODOS AGREGAR a
     }
 }

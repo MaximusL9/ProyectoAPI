@@ -18,11 +18,10 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
+        //Metodos Http y uso del mapeado para cada uno de los controladores junto con su respectivo repository
         private readonly IProductoRepositery _productoRepo;
         private readonly ILogger<ProductoController> _logger;
         private readonly IMapper _mapper;
-        //private readonly ProyectContext PC;
-        //private readonly ProductoRepositery PR;
 
         public ProductoController(ILogger<ProductoController> logger, IProductoRepositery productoRepo, IMapper mapper)
         {
@@ -30,7 +29,7 @@ namespace ProyectoAPI.Controllers
             _productoRepo = productoRepo;
             _mapper = mapper;
         }
-
+        //METODOS HTTP DE LOS PRODUCTOS
         [HttpGet("GetProductos")]
         [ProducesResponseType(StatusCodes.Status200OK)]
        
@@ -110,7 +109,6 @@ namespace ProyectoAPI.Controllers
                 return BadRequest();
             }
             var PModel = await _productoRepo.Get(n => n.IdProducto == id);
-            //Producto? Pmodel = await PR.Get(n => n.IdProducto == id);
             
             if(PModel == null)
             {

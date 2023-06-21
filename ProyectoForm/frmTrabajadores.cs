@@ -25,7 +25,7 @@ namespace ProyectoForm
             slblFecha.Text = DateTime.Now.ToLongDateString();
             slblHora.Text = DateTime.Now.ToLongTimeString();
         }
-
+        //Metodo para llamar a todos los empleados
         private async void GetAllEmpleados()
         {
             using (var client = new HttpClient())
@@ -48,7 +48,7 @@ namespace ProyectoForm
         {
             AddEmpleado();
         }
-
+        //Metodo para agregar nuevos empleados
         private async void AddEmpleado()
         {
             EmployeeCreateDto employeeDto = new EmployeeCreateDto();
@@ -73,7 +73,7 @@ namespace ProyectoForm
             Clear();
             GetAllEmpleados();
         }
-
+        //Limpiar los textbox
         private void Clear()
         {
             txtNumeroINSS.Text = string.Empty;
@@ -86,7 +86,7 @@ namespace ProyectoForm
             txtNumeroINSS.Enabled = true;
         }
         private static int inss = 0;
-
+        //Rellenar los textbox al presionar una celda del datagridview
         private void dgvTrabajadores_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             foreach (DataGridViewRow row in dgvTrabajadores.Rows)
@@ -103,7 +103,7 @@ namespace ProyectoForm
             btnModificar.Enabled = true;
             btnLimpiar.Enabled = true;
         }
-
+        //Conseguir empleados por el Inss(id)
         private async void GetEmpladoByInss()
         {
             using (var client = new HttpClient())
@@ -127,13 +127,13 @@ namespace ProyectoForm
                 }
             }
         }
-
+        
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (inss != 0)
                 UpdateEmpleado(inss);
         }
-
+        //Metodo Put para modificar los empleados
         private async void UpdateEmpleado(int inss)
         {
             EmployeeUpdateDto employeeDto = new()
@@ -165,7 +165,7 @@ namespace ProyectoForm
             if (inss != 0)
                 DeleteEmpleado();
         }
-
+        //Metodo para borrar empleados existentes de la base de datos
         private async void DeleteEmpleado()
         {
             using (var client = new HttpClient())
@@ -185,7 +185,7 @@ namespace ProyectoForm
         {
             Clear();
         }
-
+        //Validaciones de los textbox para que solo entren letras o numeros
         private void txtNumeroINSS_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool valida = ValidarTextbox.ValidarNumeros(e);
@@ -239,6 +239,7 @@ namespace ProyectoForm
             else
                 erpError.Clear();
         }
+        //Validar que los textbox no esten vacios 
         private void ValidarCampo()
         {
             var vr = !string.IsNullOrEmpty(txtNumeroINSS.Text) && !string.IsNullOrEmpty(txtNombre.Text) && !string.IsNullOrEmpty(txtCargo.Text) && !string.IsNullOrEmpty(txtPais.Text) && !string.IsNullOrEmpty(txtCiudad.Text) && !string.IsNullOrEmpty(txtSalario.Text);

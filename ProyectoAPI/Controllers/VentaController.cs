@@ -12,6 +12,7 @@ namespace ProyectoAPI.Controllers
     [ApiController]
     public class VentaController:ControllerBase
     {
+        //Metodos Http y uso del mapeado para cada uno de los controladores junto con su respectivo repository
         private readonly IVentasRepositery VR;
         private readonly IMapper mapper;
         private readonly ILogger<VentaController> logger;
@@ -22,7 +23,7 @@ namespace ProyectoAPI.Controllers
             this.mapper = mapper;
             this.logger = logger;
         }
-
+        //METODOS HTTP DE LAS VENTAS
         [HttpGet("GetAllVentas")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<VentaDto>> GetVentas()

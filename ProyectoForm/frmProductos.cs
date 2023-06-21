@@ -28,7 +28,7 @@ namespace ProyectoForm
             GetAllProductos();
         }
 
-
+        //Asignando la url para poder usarla en los metodos Http
         private void AsignarUri(HttpClient client)
         {
             client.BaseAddress = new Uri("https://localhost:7163/api/Producto/");
@@ -36,7 +36,7 @@ namespace ProyectoForm
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         }
-
+        //Mandar a llamar todos los productos haciendo uso de la url
         private async void GetAllProductos()
         {
             List<ProductoDto> listaProductos = new();
@@ -60,6 +60,7 @@ namespace ProyectoForm
             }
 
         }
+        //Agregar nuevos productos a la base de datos
         private async void AddProducto()
         {
             using (var client = new HttpClient())
@@ -108,7 +109,7 @@ namespace ProyectoForm
         {
             if (idProducto !=0) { EliminarProducto(); }
         }
-
+        //Relllenar los textbox al hacer click en una celda especifica de la base da datos
         private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
@@ -126,7 +127,7 @@ namespace ProyectoForm
                 btnClear.Enabled = true;
             
         }
-
+        //Modificar productos existentes en la base de datos
         private async void UpdateProducto(int id)
         {
             ActualizarProductoDto productoDto = new()
@@ -150,7 +151,7 @@ namespace ProyectoForm
             Clear(this);
             GetAllProductos();
         }
-
+        //Limpiar controladores del formulario
         private void Clear(Form f)
         {
            foreach(Control Controls in f.Controls)
@@ -162,7 +163,7 @@ namespace ProyectoForm
 
             }
         }
-
+        //Conseguir un producto en especifico por el id
         private async void GetProductoById()
         {
             using (var client = new HttpClient())
@@ -197,6 +198,7 @@ namespace ProyectoForm
                 UpdateProducto(idProducto); 
             }
         }
+        //Eliminar productos existentes en la base de datos
         private async void EliminarProducto()
         {
             using (var client = new HttpClient())
@@ -211,7 +213,7 @@ namespace ProyectoForm
             Clear(this);
             GetAllProductos();
         }
-
+        //Validaciones para los textbox para que solo entren letras o numeros
         private void txtIDProducto_KeyPress(object sender, KeyPressEventArgs e)
         {
             bool valida = ValidarTextbox.ValidarNumeros(e);

@@ -25,7 +25,7 @@ namespace ProyectoForm
             lblFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             PanelMenuTop.BackColor = Color.FromArgb(20, 20, 95);
         }
-
+        //Abrir los diferentes formularios de la base de datos en el formulario principar (Menu)
         private void btnTrabajadores_Click(object sender, EventArgs e)
         {
             BotonActivo((Button)sender);
@@ -49,6 +49,7 @@ namespace ProyectoForm
             BotonActivo((Button)sender);
             AbrirFormulario(new frmVentas());
         }
+        //Metodo usado para poder abrir cada uno de los formularios
         private void AbrirFormulario(Form FormularioHijo)
         {
             if (formularioactivo != null)
